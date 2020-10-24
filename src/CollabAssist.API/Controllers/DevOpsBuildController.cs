@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace CollabAssist.API.Controllers
 {
-    [Route("build")]
-    public class BuildController : ControllerBase
+    [Route("devops/build")]
+    public class DevOpsBuildController : ControllerBase
     {
-
-        public BuildController()
-        {
-        }
-
-        [HttpGet]
-        public IActionResult Get()
+        [HttpPost]
+        [Route("new")]
+        public IActionResult Index()
         {
             return new OkResult();
         }

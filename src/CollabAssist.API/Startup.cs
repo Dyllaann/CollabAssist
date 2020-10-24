@@ -1,4 +1,6 @@
 using CollabAssist.Configuration;
+using CollabAssist.External.Slack;
+using CollabAssist.External.Slack.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,10 @@ namespace CollabAssist.API
         {
             var config = _configuration.Get<CollabAssistConfiguration>();
             services.AddSingleton(config);
+            services.AddSingleton(config.Slack);
+
+            services.AddTransient<ISlackClient, SlackClient>();
+            services.AddTransient<ISlackPrManager, SlackPrManager>();
 
             services.AddControllers();
         }
