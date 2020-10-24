@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CollabAssist.Configuration\CollabAssist.Configuration.csproj" />
+    <ProjectReference Include="..\CollabAssist.External.AzureDevOps\CollabAssist.External.AzureDevOps.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,7 +17,7 @@ namespace CollabAssist.API.Controllers
 
         [HttpPost]
         [Route("new")]
-        public IActionResult NewPr([FromBody] PullRequestNotification pr)
+        public IActionResult NewPr([FromBody] DevOpsPullRequestNotification pr)
         {
             if (!pr.IsValid())
             {
@@ -30,7 +30,7 @@ namespace CollabAssist.API.Controllers
 
         [HttpPost]
         [Route("update")]
-        public IActionResult UpdatedPr([FromBody] PullRequestNotification pr)
+        public IActionResult UpdatedPr([FromBody] DevOpsPullRequestNotification pr)
         {
             if (!pr.IsValid())
             {

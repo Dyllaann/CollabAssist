@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.API", "src\CollabAssist.API\CollabAssist.API.csproj", "{3EC497F7-BFDA-4FE8-AA2A-34E8C6560804}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.Configuration", "src\CollabAssist.Configuration\CollabAssist.Configuration.csproj", "{2AB9267D-BCB5-4BAF-960B-35A952EA96B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.Services", "src\CollabAssist.Services\CollabAssist.Services.csproj", "{937C9FDF-C3EF-4B7B-A7FF-563FAEF0818C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.External.AzureDevOps", "src\CollabAssist.External.AzureDevOps\CollabAssist.External.AzureDevOps.csproj", "{4E4687F9-998B-4B07-AA8C-564C09F6DBB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.External.Slack", "src\CollabAssist.External.Slack\CollabAssist.External.Slack.csproj", "{09696979-FA6D-46F1-A7AE-7CBD23925F47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabAssist.Test.Unit", "test\CollabAssist.Test.Unit\CollabAssist.Test.Unit.csproj", "{3E314202-A0E8-42F4-A1CD-83C11472B64C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EC497F7-BFDA-4FE8-AA2A-34E8C6560804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC497F7-BFDA-4FE8-AA2A-34E8C6560804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC497F7-BFDA-4FE8-AA2A-34E8C6560804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC497F7-BFDA-4FE8-AA2A-34E8C6560804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AB9267D-BCB5-4BAF-960B-35A952EA96B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AB9267D-BCB5-4BAF-960B-35A952EA96B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AB9267D-BCB5-4BAF-960B-35A952EA96B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AB9267D-BCB5-4BAF-960B-35A952EA96B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937C9FDF-C3EF-4B7B-A7FF-563FAEF0818C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937C9FDF-C3EF-4B7B-A7FF-563FAEF0818C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937C9FDF-C3EF-4B7B-A7FF-563FAEF0818C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937C9FDF-C3EF-4B7B-A7FF-563FAEF0818C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4687F9-998B-4B07-AA8C-564C09F6DBB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4687F9-998B-4B07-AA8C-564C09F6DBB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4687F9-998B-4B07-AA8C-564C09F6DBB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4687F9-998B-4B07-AA8C-564C09F6DBB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09696979-FA6D-46F1-A7AE-7CBD23925F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09696979-FA6D-46F1-A7AE-7CBD23925F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09696979-FA6D-46F1-A7AE-7CBD23925F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09696979-FA6D-46F1-A7AE-7CBD23925F47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E314202-A0E8-42F4-A1CD-83C11472B64C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E314202-A0E8-42F4-A1CD-83C11472B64C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E314202-A0E8-42F4-A1CD-83C11472B64C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E314202-A0E8-42F4-A1CD-83C11472B64C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD28AC98-8EAF-4723-A0FF-1C58EE06AE26}
+	EndGlobalSection
+EndGlobal

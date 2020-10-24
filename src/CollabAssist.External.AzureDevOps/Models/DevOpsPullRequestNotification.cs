@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CollabAssist.External.AzureDevOps.Models
 {
-    public class PullRequestNotification
+    public class DevOpsPullRequestNotification
     {
         [JsonProperty("subscriptionId")]
         public Guid SubscriptionId { get; set; }
