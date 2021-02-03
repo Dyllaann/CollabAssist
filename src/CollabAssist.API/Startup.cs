@@ -1,6 +1,4 @@
-using CollabAssist.Configuration;
 using CollabAssist.Output.Slack;
-using CollabAssist.Output.Slack.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

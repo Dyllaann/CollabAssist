@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using CollabAssist.Configuration;
 using CollabAssist.Output.Slack.Models;
 using Newtonsoft.Json;
 

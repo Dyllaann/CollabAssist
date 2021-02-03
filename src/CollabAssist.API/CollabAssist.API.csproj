@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CollabAssist.Configuration\CollabAssist.Configuration.csproj" />
     <ProjectReference Include="..\CollabAssist.Incoming\CollabAssist.Incoming.csproj" />
     <ProjectReference Include="..\CollabAssist.Output\CollabAssist.Output.csproj" />
   </ItemGroup>
