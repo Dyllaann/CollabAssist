@@ -13,5 +13,6 @@ namespace CollabAssist.External.Slack
         {
             _client = client;
         }
+
     }
 }

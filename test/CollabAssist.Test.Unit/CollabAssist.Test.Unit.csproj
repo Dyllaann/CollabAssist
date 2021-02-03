@@ -14,9 +14,4 @@
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\CollabAssist.External.AzureDevOps\CollabAssist.External.AzureDevOps.csproj" />
-    <ProjectReference Include="..\..\src\CollabAssist.External.Slack\CollabAssist.External.Slack.csproj" />
-  </ItemGroup>
-
 </Project>

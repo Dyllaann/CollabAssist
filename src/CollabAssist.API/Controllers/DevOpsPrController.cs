@@ -1,29 +1,32 @@
-﻿using CollabAssist.External.AzureDevOps.Models;
-using CollabAssist.External.Slack;
+﻿using CollabAssist.Incoming.AzureDevOps.Models;
+using CollabAssist.Output;
+using CollabAssist.Output.Slack;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollabAssist.API.Controllers
 {
-    [Route("devops/pr")]
+    [Route("api/devops/pr")]
     public class DevOpsPrController : ControllerBase
     {
-        private readonly ISlackPrManager _slackPrManager;
+        private readonly IOutputHandler _outputHandler;
 
-        public DevOpsPrController(ISlackPrManager slackPrManager)
+        public DevOpsPrController(IOutputHandler outputHandler)
         {
-            _slackPrManager = slackPrManager;
+            _outputHandler = outputHandler;
         }
 
         [HttpPost]
         [Route("new")]
-        public IActionResult NewPr([FromBody] DevOpsPullRequestNotification pr)
+        public IActionResult NewPr([FromBody] DevOpsPullRequestNotification devopspr)
         {
-            if (!pr.IsValid())
+            if (!devopspr.IsValidNewPr())
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
+            var pr = devopspr.To();
+            _outputHandler.NotifyNewPullRequest(pr);
 
             return new OkResult();
         }
@@ -32,7 +35,7 @@ namespace CollabAssist.API.Controllers
         [Route("update")]
         public IActionResult UpdatedPr([FromBody] DevOpsPullRequestNotification pr)
         {
-            if (!pr.IsValid())
+            if (!pr.IsValidNewPr())
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

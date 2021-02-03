@@ -9,11 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.Configuration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.Services", "CollabAssist.Services\CollabAssist.Services.csproj", "{937C9FDF-C3EF-4B7B-A7FF-563FAEF0818C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist", "CollabAssist\CollabAssist.csproj", "{DAC2B7EA-AAFB-469F-8880-A884465A32A4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabAssist.External.AzureDevOps", "CollabAssist.External.AzureDevOps\CollabAssist.External.AzureDevOps.csproj", "{4E4687F9-998B-4B07-AA8C-564C09F6DBB4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabAssist.External.Slack", "CollabAssist.External.Slack\CollabAssist.External.Slack.csproj", "{09696979-FA6D-46F1-A7AE-7CBD23925F47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

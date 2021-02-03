@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CollabAssist.External.Slack.Models;
-using CollabAssist.External.Slack.Models.Blocks;
+using CollabAssist.Output.Slack.Models;
+using CollabAssist.Output.Slack.Models.Blocks;
 using FluentAssertions;
 using Xunit;
 

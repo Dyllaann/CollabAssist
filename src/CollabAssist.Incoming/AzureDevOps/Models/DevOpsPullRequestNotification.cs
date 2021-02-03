@@ -1,7 +1,8 @@
 ﻿using System;
+using CollabAssist.Output.AzureDevOps.Models;
 using Newtonsoft.Json;
 
-namespace CollabAssist.External.AzureDevOps.Models
+namespace CollabAssist.Incoming.AzureDevOps.Models
 {
     public class DevOpsPullRequestNotification
     {
@@ -37,6 +38,21 @@ namespace CollabAssist.External.AzureDevOps.Models
                    && EventType != null
                    && Message != null
                    && Resource != null;
+        }
+
+        public PullRequest To()
+        {
+            return new PullRequest
+            {
+                Id = Id.ToString(),
+                Title = Resource.Title,
+                CreatedDate = CreatedDate,
+                AuthorName = Resource.CreatedBy.DisplayName,
+                AuthorEmail = Resource.CreatedBy.UniqueName,
+
+                ProjectName = Resource.Repository.Project.Name,
+                RepositoryName = Resource.Repository.Name
+            };
         }
     }
 }

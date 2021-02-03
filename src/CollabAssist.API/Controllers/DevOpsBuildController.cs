@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CollabAssist.API.Controllers
 {
-    [Route("devops/build")]
+    [Route("api/devops/build")]
     public class DevOpsBuildController : ControllerBase
     {
         [HttpPost]

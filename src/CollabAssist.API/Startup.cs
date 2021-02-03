@@ -1,6 +1,6 @@
 using CollabAssist.Configuration;
-using CollabAssist.External.Slack;
-using CollabAssist.External.Slack.Client;
+using CollabAssist.Output.Slack;
+using CollabAssist.Output.Slack.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,12 +21,8 @@ namespace CollabAssist.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var config = _configuration.Get<CollabAssistConfiguration>();
-            services.AddSingleton(config);
-            services.AddSingleton(config.Slack);
 
-            services.AddTransient<ISlackClient, SlackClient>();
-            services.AddTransient<ISlackPrManager, SlackPrManager>();
+            services.RegisterSlack(_configuration);
 
             services.AddControllers();
         }

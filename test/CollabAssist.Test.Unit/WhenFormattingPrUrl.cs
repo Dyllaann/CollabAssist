@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CollabAssist.External.Slack;
+using CollabAssist.Incoming.Slack;
 using FluentAssertions;
 using Xunit;
 
