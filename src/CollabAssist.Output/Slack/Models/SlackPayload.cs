@@ -12,6 +12,9 @@ namespace CollabAssist.Output.Slack.Models
         [JsonProperty("text")]
         public string Text { get; set; }
 
+        [JsonProperty("ts")]
+        public string Timestamp { get; set; }
+
         [JsonProperty("blocks")]
         public List<IBlock> Blocks { get; set; }
 

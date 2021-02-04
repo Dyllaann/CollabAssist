@@ -1,4 +1,5 @@
 ﻿using System;
+using CollabAssist.Incoming.AzureDevOps;
 using CollabAssist.Output.Slack;
 using FluentAssertions;
 using Xunit;
@@ -14,7 +15,7 @@ namespace CollabAssist.Test.Unit
 
             var url = "https://dev.azure.com/collabassistorg/CollabAssistProject/_git/CollabAssist/pullrequest/1337";
 
-            var formattedUrl = SlackUtils.FormatPrUrl(pr);
+            var formattedUrl = DevOpsUtils.FormatPrUrl(pr);
 
             formattedUrl
                 .Should()
@@ -27,7 +28,7 @@ namespace CollabAssist.Test.Unit
             var pr = TestUtils.GenerateValidDevOpsPrNotification();
             pr.Resource.Repository.Project = null;
 
-            Action formatAction = () => SlackUtils.FormatPrUrl(pr);
+            Action formatAction = () => DevOpsUtils.FormatPrUrl(pr);
 
             formatAction
                 .Should()

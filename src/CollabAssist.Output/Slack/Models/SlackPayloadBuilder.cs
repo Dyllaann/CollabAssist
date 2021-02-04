@@ -9,6 +9,7 @@ namespace CollabAssist.Output.Slack.Models
     {
         private string _channel;
         private string _text;
+        private string _timestamp;
         private List<IBlock> _blocks;
 
         public SlackPayloadBuilder()
@@ -25,6 +26,12 @@ namespace CollabAssist.Output.Slack.Models
         public SlackPayloadBuilder HasPreviewText(string text)
         {
             _text = text;
+            return this;
+        }
+
+        public SlackPayloadBuilder UpdatesMessage(string timestamp)
+        {
+            _timestamp = timestamp;
             return this;
         }
 
@@ -56,6 +63,7 @@ namespace CollabAssist.Output.Slack.Models
             {
                 Channel = _channel,
                 Text = _text,
+                Timestamp = _timestamp,
                 Blocks = _blocks
             };
         }

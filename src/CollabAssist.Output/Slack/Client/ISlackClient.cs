@@ -9,6 +9,9 @@ namespace CollabAssist.Output.Slack.Client
 {
     public interface ISlackClient
     {
-        Task<SlackResponse> SendPayload(SlackPayload payload);
+        Task<SlackResponse> PostMessage(SlackPayload payload);
+        Task<SlackResponse> UpdateMessage(SlackPayload payload);
+        Task<SlackResponse> DeleteMessage(string channel, string timestamp);
+        Task<SlackUserResponse> GetUserByEmail(string email);
     }
 }

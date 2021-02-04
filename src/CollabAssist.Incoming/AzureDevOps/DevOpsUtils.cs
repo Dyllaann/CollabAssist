@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using CollabAssist.Incoming.AzureDevOps.Models;
 
-namespace CollabAssist.Output.Slack
+namespace CollabAssist.Incoming.AzureDevOps
 {
-    public static class SlackUtils
+    public static class DevOpsUtils
     {
-        private static readonly string _organizationRegex = @"(https:\/\/dev.azure.com/)(.*?)(\/.*)";
+        private const string OrganizationRegex = @"(https:\/\/dev.azure.com/)(.*?)(\/.*)";
 
         public static string FormatPrUrl(DevOpsPullRequestNotification pr)
         {
             var projectUrl = pr.Resource.Repository.Project.Url;
-            var regex = Regex.Match(projectUrl, _organizationRegex);
+            var regex = Regex.Match(projectUrl, OrganizationRegex);
             if (regex.Success)
             {
                 var org = regex.Groups[2];
@@ -22,7 +24,7 @@ namespace CollabAssist.Output.Slack
                 return $"https://dev.azure.com/{org}/{project}/_git/{repository}/pullrequest/{id}";
             }
 
-            throw new Exception("Unable to read organization. Cannot format PR url");
+            return null;
         }
     }
 }

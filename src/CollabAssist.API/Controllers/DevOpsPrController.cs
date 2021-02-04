@@ -1,6 +1,8 @@
-﻿using CollabAssist.Incoming.AzureDevOps.Models;
+﻿using System.Threading.Tasks;
+using CollabAssist.Incoming.AzureDevOps.Models;
 using CollabAssist.Output;
 using CollabAssist.Output.Slack;
+using CollabAssist.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,38 +11,41 @@ namespace CollabAssist.API.Controllers
     [Route("api/devops/pr")]
     public class DevOpsPrController : ControllerBase
     {
-        private readonly IOutputHandler _outputHandler;
+        private readonly PullRequestService _prService;
 
-        public DevOpsPrController(IOutputHandler outputHandler)
+        public DevOpsPrController(PullRequestService prService)
         {
-            _outputHandler = outputHandler;
+            _prService = prService;
         }
 
         [HttpPost]
         [Route("new")]
-        public IActionResult NewPr([FromBody] DevOpsPullRequestNotification devopspr)
+        public async Task<IActionResult> NewPr([FromBody] DevOpsPullRequestNotification devopspr)
         {
-            if (!devopspr.IsValidNewPr())
+            if (devopspr.IsValid())
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                var pr = devopspr.To();
+                if (await _prService.HandleNewPullRequest(pr).ConfigureAwait(false))
+                {
+                    return new OkResult();
+                }
             }
-
-            var pr = devopspr.To();
-            _outputHandler.NotifyNewPullRequest(pr);
-
-            return new OkResult();
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         [HttpPost]
         [Route("update")]
-        public IActionResult UpdatedPr([FromBody] DevOpsPullRequestNotification pr)
+        public async Task<IActionResult> UpdatedPr([FromBody] DevOpsPullRequestNotification devopspr)
         {
-            if (!pr.IsValidNewPr())
+            if (devopspr.IsValid())
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                var pr = devopspr.To();
+                if (await _prService.HandleUpdatedPullRequest(pr).ConfigureAwait(false))
+                {
+                    return new OkResult();
+                }
             }
-
-            return new OkResult();
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }

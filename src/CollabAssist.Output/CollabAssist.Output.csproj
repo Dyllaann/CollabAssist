@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CollabAssist.Incoming\CollabAssist.Incoming.csproj" />
-    <ProjectReference Include="..\CollabAssist.Services\CollabAssist.Services.csproj" />
   </ItemGroup>
 
 </Project>

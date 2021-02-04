@@ -8,8 +8,10 @@ namespace CollabAssist.Incoming
     {
         public string Id { get; set; }
         public string Title { get; set; }
-        public DateTime CreatedDate { get; set; } 
         public string Url { get; set; }
+        public PullRequestStatus Status { get; set; }
+        public DateTime CreatedDate { get; set; } 
+        
 
 
         public string AuthorName { get; set; }
@@ -17,6 +19,7 @@ namespace CollabAssist.Incoming
 
         public string ProjectName { get; set; }
         public string RepositoryName { get; set; }
+        
+        public List<Reviewer> Reviewers { get; set; } = new List<Reviewer>();
     }
-
 }
