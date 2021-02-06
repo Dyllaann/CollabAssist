@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CollabAssist.Incoming
+﻿namespace CollabAssist.Incoming.Models
 {
     public class Reviewer
     {

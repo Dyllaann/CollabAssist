@@ -1,6 +1,5 @@
 ﻿using System;
-using CollabAssist.Incoming.AzureDevOps;
-using CollabAssist.Output.Slack;
+using CollabAssist.Incoming.DevOps;
 using FluentAssertions;
 using Xunit;
 

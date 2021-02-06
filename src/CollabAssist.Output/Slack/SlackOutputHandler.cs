@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using CollabAssist.Incoming;
+using CollabAssist.Incoming.Models;
 using CollabAssist.Output.Slack.Client;
 using CollabAssist.Output.Slack.Models;
 
@@ -43,7 +44,7 @@ namespace CollabAssist.Output.Slack
                 ? SlackMessageFormatter.FormatUpdatedPullRequestWithImage(update, _configuration.Channel, profilePicture)
                 : SlackMessageFormatter.FormatUpdatedPullRequest(update, _configuration.Channel);
 
-            var success = await _client.UpdateMessage(payload);
+            var success = await _client.PostMessage(payload);
             return success.Ok;
         }
 

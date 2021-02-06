@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using CollabAssist.Incoming.AzureDevOps.Models;
+﻿using System.Text.RegularExpressions;
+using CollabAssist.Incoming.DevOps.Models;
 
-namespace CollabAssist.Incoming.AzureDevOps
+namespace CollabAssist.Incoming.DevOps
 {
     public static class DevOpsUtils
     {

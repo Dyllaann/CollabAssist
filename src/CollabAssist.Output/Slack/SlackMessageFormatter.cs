@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using CollabAssist.Incoming;
+using CollabAssist.Incoming.Models;
 using CollabAssist.Output.Slack.Models;
 
 namespace CollabAssist.Output.Slack

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\CollabAssist.Incoming.DevOps\CollabAssist.Incoming.DevOps.csproj" />
     <ProjectReference Include="..\..\src\CollabAssist.Incoming\CollabAssist.Incoming.csproj" />
     <ProjectReference Include="..\..\src\CollabAssist.Output\CollabAssist.Output.csproj" />
   </ItemGroup>

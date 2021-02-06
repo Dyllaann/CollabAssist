@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CollabAssist.Incoming.AzureDevOps.Models;
+using CollabAssist.Incoming.DevOps.Models;
 using CollabAssist.Output;
 using CollabAssist.Output.Slack;
 using CollabAssist.Services;

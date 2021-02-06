@@ -1,30 +1,35 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
-using CollabAssist.Output.AzureDevOps.Models;
+using CollabAssist.Incoming.Models;
 using Newtonsoft.Json;
 
-namespace CollabAssist.Incoming.AzureDevOps.Models
+namespace CollabAssist.Incoming.DevOps.Models
 {
     public class DevOpsPullRequestNotification
     {
-        [JsonProperty("subscriptionId")] public Guid SubscriptionId { get; set; }
+        [JsonProperty("subscriptionId")]
+        public Guid SubscriptionId { get; set; }
 
-        [JsonProperty("notificationId")] public int NotificationId { get; set; }
+        [JsonProperty("notificationId")]
+        public int NotificationId { get; set; }
 
-        [JsonProperty("id")] public Guid Id { get; set; }
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
 
-        [JsonProperty("eventType")] public string EventType { get; set; }
+        [JsonProperty("eventType")]
+        public string EventType { get; set; }
 
-        [JsonProperty("message")] public Message Message { get; set; }
+        [JsonProperty("message")]
+        public Message Message { get; set; }
 
-        [JsonProperty("detailedMessage")] public Message DetailedMessage { get; set; }
+        [JsonProperty("detailedMessage")]
+        public Message DetailedMessage { get; set; }
 
-        [JsonProperty("resource")] public Resource Resource { get; set; }
+        [JsonProperty("resource")]
+        public Resource Resource { get; set; }
 
-        [JsonProperty("createdDate")] public DateTime CreatedDate { get; set; }
-
+        [JsonProperty("createdDate")]
+        public DateTime CreatedDate { get; set; }
 
         public bool IsValid()
         {
@@ -34,7 +39,6 @@ namespace CollabAssist.Incoming.AzureDevOps.Models
                    && EventType != null
                    && Resource != null;
         }
-
         public PullRequest To()
         {
             var pr = new PullRequest
@@ -54,7 +58,7 @@ namespace CollabAssist.Incoming.AzureDevOps.Models
             {
                 foreach (var devopsReviewer in Resource.Reviewers)
                 {
-                    var reviewer = new Reviewer(devopsReviewer.DisplayName);
+                    var reviewer = new Incoming.Models.Reviewer(devopsReviewer.DisplayName);
                     switch (devopsReviewer.Vote)
                     {
                         case ReviewerVote.Rejected:
@@ -95,7 +99,7 @@ namespace CollabAssist.Incoming.AzureDevOps.Models
                 {
                     pr.Status = PullRequestStatus.ApprovedUncompleted;
                 }
-                else if(pr.Reviewers.Count(r => r.Vote == Vote.Rejected) > 0)
+                else if (pr.Reviewers.Count(r => r.Vote == Vote.Rejected) > 0)
                 {
                     pr.Status = PullRequestStatus.Rejected;
                 }

@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using CollabAssist.Incoming;
+using CollabAssist.Incoming.Models;
 using CollabAssist.Output;
 
 namespace CollabAssist.Services
 {
     public class PullRequestService
     {
+        private readonly IInputHandler _inputHandler;
         private readonly IOutputHandler _outputHandler;
 
-        public PullRequestService(IOutputHandler outputHandler)
+        public PullRequestService(IInputHandler inputHandler, IOutputHandler outputHandler)
         {
+            _inputHandler = inputHandler;
             _outputHandler = outputHandler;
         }
-
 
         public async Task<bool> HandleNewPullRequest(PullRequest pr)
         {
@@ -25,6 +27,7 @@ namespace CollabAssist.Services
                 return false;
             }
 
+
             //TODO: Handle storing the identifier in the input.
             //Can be used for retrieving the same message for editing purposes.
             return true;
@@ -32,14 +35,17 @@ namespace CollabAssist.Services
 
         public async Task<bool> HandleUpdatedPullRequest(PullRequest pr)
         {
-            //TODO: Handle retrieving of the identifier that has been stored in a new pr
-            //This is needed because we want to update the same message
-            var identifier = string.Empty;
+            var identifier = await _inputHandler.GetIdentifier(pr, "CollabAssist.MessageIdentifier").ConfigureAwait(false);
+            if (identifier == null)
+            {
+                return false;
+            }
 
             if (pr.Status == PullRequestStatus.Abandoned)
             {
                 return await _outputHandler.HandleAbandonedPullRequest(pr, identifier).ConfigureAwait(false);
             }
+
             return await _outputHandler.HandleUpdatedPullRequest(pr, identifier).ConfigureAwait(false);
         }
     }

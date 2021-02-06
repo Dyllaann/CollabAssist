@@ -1,6 +1,5 @@
 ﻿using System;
-using CollabAssist.Incoming.AzureDevOps.Models;
-using CollabAssist.Output.AzureDevOps.Models;
+using CollabAssist.Incoming.DevOps.Models;
 
 namespace CollabAssist.Test.Unit
 {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CollabAssist.Output.AzureDevOps.Models
+namespace CollabAssist.Incoming.DevOps.Models
 {
     public class Message
     {

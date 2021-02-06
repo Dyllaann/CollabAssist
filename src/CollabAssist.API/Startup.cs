@@ -1,3 +1,4 @@
+using CollabAssist.Incoming.DevOps;
 using CollabAssist.Output.Slack;
 using CollabAssist.Services;
 using Microsoft.AspNetCore.Builder;
@@ -23,6 +24,7 @@ namespace CollabAssist.API
             services.AddSingleton<PullRequestService>();
 
             services.RegisterSlack(_configuration);
+            services.RegisterDevOps(_configuration);
 
             services.AddControllers();
         }
