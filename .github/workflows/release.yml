@@ -1,9 +1,12 @@
 name: Release
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
-  workflow_dispatch:
+  create:
+    tags:
+      - v*
 
 jobs:
   release:
