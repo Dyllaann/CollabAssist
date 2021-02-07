@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="idunno.Authentication.Basic" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CollabAssist.Incoming.DevOps\CollabAssist.Incoming.DevOps.csproj" />
     <ProjectReference Include="..\CollabAssist.Incoming\CollabAssist.Incoming.csproj" />
     <ProjectReference Include="..\CollabAssist.Output\CollabAssist.Output.csproj" />

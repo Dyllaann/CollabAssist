@@ -3,11 +3,13 @@ using CollabAssist.Incoming.DevOps.Models;
 using CollabAssist.Output;
 using CollabAssist.Output.Slack;
 using CollabAssist.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollabAssist.API.Controllers
 {
+    [Authorize]
     [Route("api/devops/pr")]
     public class DevOpsPrController : ControllerBase
     {
