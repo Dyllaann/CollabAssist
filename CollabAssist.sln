@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.Output", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.Incoming", "src\CollabAssist.Incoming\CollabAssist.Incoming.csproj", "{18EB1B17-821B-44FA-B023-5C5C8EF0C9AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabAssist.Incoming.DevOps", "src\CollabAssist.Incoming.DevOps\CollabAssist.Incoming.DevOps.csproj", "{03891330-EBDF-475C-BE7E-AE6E66D8E56D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollabAssist.Incoming.DevOps", "src\CollabAssist.Incoming.DevOps\CollabAssist.Incoming.DevOps.csproj", "{03891330-EBDF-475C-BE7E-AE6E66D8E56D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabAssist.Output.Slack", "src\CollabAssist.Output.Slack\CollabAssist.Output.Slack.csproj", "{E606B599-7DC3-4028-9D2B-B83C2D819699}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{03891330-EBDF-475C-BE7E-AE6E66D8E56D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03891330-EBDF-475C-BE7E-AE6E66D8E56D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03891330-EBDF-475C-BE7E-AE6E66D8E56D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E606B599-7DC3-4028-9D2B-B83C2D819699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E606B599-7DC3-4028-9D2B-B83C2D819699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E606B599-7DC3-4028-9D2B-B83C2D819699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E606B599-7DC3-4028-9D2B-B83C2D819699}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

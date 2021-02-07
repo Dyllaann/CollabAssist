@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using CollabAssist.Incoming.DevOps.Models;
-using CollabAssist.Output;
-using CollabAssist.Output.Slack;
 using CollabAssist.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
