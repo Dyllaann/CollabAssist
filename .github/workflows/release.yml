@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +24,6 @@ jobs:
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
-
-  publish:
-    runs-on: ubuntu-latest
 
     - name: Publish Dotnet
       run: dotnet publish -c Release -o out/
