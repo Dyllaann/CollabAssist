@@ -22,9 +22,16 @@ namespace CollabAssist.Incoming.DevOps
         }
 
 
-        public bool StoreIdentifier(PullRequest pr, string key, string identifier)
+        public async Task<bool> StoreIdentifier(PullRequest pr, string key, string identifier)
         {
-            throw new NotImplementedException();
+            return await _devopsclient.StorePullRequestMetadata(pr, key, identifier);
+        }
+
+        public async Task<Build> LinkBuildWithPr(Build build)
+        {
+            var metadata= await _devopsclient.LinkBuildWithPr(build).ConfigureAwait(false);
+            return build;
+
         }
     }
 }

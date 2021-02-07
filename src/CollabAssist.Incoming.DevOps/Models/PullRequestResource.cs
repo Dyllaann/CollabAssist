@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace CollabAssist.Incoming.DevOps.Models
 {
-    public class Resource
+    public class PullRequestResource
     {
         [JsonProperty("repository")]
         public Repository Repository { get; set; }

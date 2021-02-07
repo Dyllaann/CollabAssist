@@ -1,4 +1,5 @@
 ﻿using System;
+using CollabAssist.Incoming.Models;
 using Newtonsoft.Json;
 
 namespace CollabAssist.Incoming.DevOps.Models
@@ -17,13 +18,22 @@ namespace CollabAssist.Incoming.DevOps.Models
         [JsonProperty("eventType")]
         public string EventType { get; set; }
 
-        [JsonProperty("message")]
-        public Message Message { get; set; }
-
-        [JsonProperty("detailedMessage")]
-        public Message DetailedMessage { get; set; }
 
         [JsonProperty("resource")]
-        public Resource Resource { get; set; }
+        public BuildResource Resource { get; set; }
+
+        [JsonProperty("resourceContainers")]
+        public ResourceContainers ResourceContainers { get; set; }
+
+
+        public Build To()
+        {
+            return new Build
+            {
+                Id = Resource.Id.ToString(),
+                Project = ResourceContainers.Project.Id,
+                Url = Resource.Url
+            };
+        }
     }
 }

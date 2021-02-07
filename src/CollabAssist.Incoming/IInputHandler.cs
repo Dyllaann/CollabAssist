@@ -9,6 +9,8 @@ namespace CollabAssist.Incoming
     public interface IInputHandler
     {
         Task<string> GetIdentifier(PullRequest pr, string key);
-        bool StoreIdentifier(PullRequest pr, string key, string identifier);
+        Task<bool> StoreIdentifier(PullRequest pr, string key, string identifier);
+
+        Task<Build> LinkBuildWithPr(Build build);
     }
 }

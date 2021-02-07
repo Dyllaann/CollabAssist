@@ -12,5 +12,7 @@ namespace CollabAssist.Output
         Task<string> NotifyNewPullRequest(PullRequest pr);
         Task<bool> HandleUpdatedPullRequest(PullRequest update, string inputHandlerId = null);
         Task<bool> HandleAbandonedPullRequest(PullRequest update, string inputHandlerId = null);
+
+        Task<bool> NotifyFailedPullRequestBuild(Build build);
     }
 }

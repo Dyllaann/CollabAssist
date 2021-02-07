@@ -12,7 +12,7 @@ namespace CollabAssist.Test.Unit
                 SubscriptionId = new Guid("e5fa19dd-faf4-4c44-a729-d051a0ee9420"),
                 NotificationId = 1234,
                 Id = new Guid("1b9abdcc-df22-48d2-9f38-ee87723418a6"),
-                Resource = new Resource
+                PullRequestResource = new PullRequestResource
                 {
                     Repository = new Repository()
                     {

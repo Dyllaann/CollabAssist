@@ -26,7 +26,7 @@ namespace CollabAssist.Incoming.DevOps.Models
         public Message DetailedMessage { get; set; }
 
         [JsonProperty("resource")]
-        public Resource Resource { get; set; }
+        public PullRequestResource PullRequestResource { get; set; }
 
         [JsonProperty("createdDate")]
         public DateTime CreatedDate { get; set; }
@@ -37,26 +37,26 @@ namespace CollabAssist.Incoming.DevOps.Models
                    && Id != Guid.Empty
                    && NotificationId != 0
                    && EventType != null
-                   && Resource != null;
+                   && PullRequestResource != null;
         }
         public PullRequest To()
         {
             var pr = new PullRequest
             {
-                Id = Id.ToString(),
-                Title = Resource.Title,
+                Id = PullRequestResource.PullRequestId.ToString(),
+                Title = PullRequestResource.Title,
                 CreatedDate = CreatedDate,
                 Url = DevOpsUtils.FormatPrUrl(this),
-                AuthorName = Resource.CreatedBy.DisplayName,
-                AuthorEmail = Resource.CreatedBy.UniqueName,
+                AuthorName = PullRequestResource.CreatedBy.DisplayName,
+                AuthorEmail = PullRequestResource.CreatedBy.UniqueName,
 
-                ProjectName = Resource.Repository.Project.Name,
-                RepositoryName = Resource.Repository.Name
+                ProjectName = PullRequestResource.Repository.Project.Name,
+                RepositoryName = PullRequestResource.Repository.Name
             };
 
-            if (Resource.Reviewers != null)
+            if (PullRequestResource.Reviewers != null)
             {
-                foreach (var devopsReviewer in Resource.Reviewers)
+                foreach (var devopsReviewer in PullRequestResource.Reviewers)
                 {
                     var reviewer = new Incoming.Models.Reviewer(devopsReviewer.DisplayName);
                     switch (devopsReviewer.Vote)
@@ -81,19 +81,19 @@ namespace CollabAssist.Incoming.DevOps.Models
                 }
             }
 
-            if (Resource.Status == "completed")
+            if (PullRequestResource.Status == "completed")
             {
                 pr.Status = PullRequestStatus.Completed;
             }
-            else if (Resource.Status == "abandoned")
+            else if (PullRequestResource.Status == "abandoned")
             {
                 pr.Status = PullRequestStatus.Abandoned;
             }
-            else if (Resource.Status == "active" && pr.Reviewers.Count == 0)
+            else if (PullRequestResource.Status == "active" && pr.Reviewers.Count == 0)
             {
                 pr.Status = PullRequestStatus.New;
             }
-            else if (Resource.Status == "active" && pr.Reviewers.Count > 0)
+            else if (PullRequestResource.Status == "active" && pr.Reviewers.Count > 0)
             {
                 if (pr.Reviewers.TrueForAll(r => r.Vote == Vote.Approved || r.Vote == Vote.ApprovedWithSuggestions))
                 {

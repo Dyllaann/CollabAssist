@@ -4,6 +4,7 @@ using System.Text;
 using CollabAssist.Incoming.DevOps.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.TeamFoundation.Build.WebApi;
 using Microsoft.TeamFoundation.SourceControl.WebApi;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
@@ -25,9 +26,11 @@ namespace CollabAssist.Incoming.DevOps
             var connection = new VssConnection(baseUri, credentials);
 
             var gitClient = connection.GetClient<GitHttpClient>();
+            var buildClient = connection.GetClient<BuildHttpClient>();
 
             services.AddSingleton(connection);
             services.AddSingleton(gitClient);
+            services.AddSingleton(buildClient);
 
             services.AddSingleton<IDevOpsClient, DevOpsClient>();
             services.AddSingleton<IInputHandler, DevOpsInputHandler>();

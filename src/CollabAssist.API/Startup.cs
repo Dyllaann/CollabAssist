@@ -22,6 +22,7 @@ namespace CollabAssist.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<PullRequestService>();
+            services.AddSingleton<BuildService>();
 
             services.RegisterSlack(_configuration);
             services.RegisterDevOps(_configuration);

@@ -27,10 +27,7 @@ namespace CollabAssist.Services
                 return false;
             }
 
-
-            //TODO: Handle storing the identifier in the input.
-            //Can be used for retrieving the same message for editing purposes.
-            return true;
+            return await _inputHandler.StoreIdentifier(pr, "CollabAssist.MessageIdentifier", identifier).ConfigureAwait(false);
         }
 
         public async Task<bool> HandleUpdatedPullRequest(PullRequest pr)

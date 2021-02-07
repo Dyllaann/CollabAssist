@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using CollabAssist.Incoming;
 using CollabAssist.Incoming.Models;
 using CollabAssist.Output;
@@ -18,8 +19,13 @@ namespace CollabAssist.Services
             _outputHandler = outputHandler;
         }
 
-        public bool HandleBuild(Build build)
+        public async Task<bool> HandleBuild(Build build)
         {
+            build = await _inputHandler.LinkBuildWithPr(build).ConfigureAwait(false);
+            if (build.HasPullRequestLinked)
+            {
+                await _outputHandler.NotifyFailedPullRequestBuild(build).ConfigureAwait(false);
+            }
             return false;
         }
     }

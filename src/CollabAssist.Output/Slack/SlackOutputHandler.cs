@@ -54,6 +54,11 @@ namespace CollabAssist.Output.Slack
             return success.Ok;
         }
 
+        public Task<bool> NotifyFailedPullRequestBuild(Build build)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task<string> GetAuthorProfilePictureUrl(PullRequest pr)
         {
             var user = await _client.GetUserByEmail(pr.AuthorEmail).ConfigureAwait(false);
