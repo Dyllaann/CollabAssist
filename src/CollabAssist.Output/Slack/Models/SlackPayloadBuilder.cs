@@ -10,7 +10,10 @@ namespace CollabAssist.Output.Slack.Models
         private string _channel;
         private string _text;
         private string _timestamp;
+        private string _threadTimestamp;
+        private bool _linksNames;
         private List<IBlock> _blocks;
+
 
         public SlackPayloadBuilder()
         {
@@ -32,6 +35,18 @@ namespace CollabAssist.Output.Slack.Models
         public SlackPayloadBuilder UpdatesMessage(string timestamp)
         {
             _timestamp = timestamp;
+            return this;
+        }
+
+        public SlackPayloadBuilder PostsAsThreadIn(string timestamp)
+        {
+            _threadTimestamp = timestamp;
+            return this;
+        }
+
+        public SlackPayloadBuilder LinksNames(bool linksNames)
+        {
+            _linksNames = linksNames;
             return this;
         }
 
@@ -64,6 +79,8 @@ namespace CollabAssist.Output.Slack.Models
                 Channel = _channel,
                 Text = _text,
                 Timestamp = _timestamp,
+                ThreadTimestamp = _threadTimestamp,
+                LinkNames = _linksNames,
                 Blocks = _blocks
             };
         }

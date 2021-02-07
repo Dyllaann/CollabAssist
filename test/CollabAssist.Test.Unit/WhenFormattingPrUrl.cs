@@ -25,7 +25,7 @@ namespace CollabAssist.Test.Unit
         public void GivenInvalidNotificationShouldThrow()
         {
             var pr = TestUtils.GenerateValidDevOpsPrNotification();
-            pr.PullRequestResource.Repository.Project = null;
+            pr.Resource.Repository.Project = null;
 
             Action formatAction = () => DevOpsUtils.FormatPrUrl(pr);
 

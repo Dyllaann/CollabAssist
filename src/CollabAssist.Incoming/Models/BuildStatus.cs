@@ -4,6 +4,7 @@
     {
         Unknown,
         Failed,
+        Cancelled,
         Pending,
         Running,
         Succeeded

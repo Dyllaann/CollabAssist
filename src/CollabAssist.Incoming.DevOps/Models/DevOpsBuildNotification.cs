@@ -18,7 +18,6 @@ namespace CollabAssist.Incoming.DevOps.Models
         [JsonProperty("eventType")]
         public string EventType { get; set; }
 
-
         [JsonProperty("resource")]
         public BuildResource Resource { get; set; }
 
@@ -28,12 +27,30 @@ namespace CollabAssist.Incoming.DevOps.Models
 
         public Build To()
         {
-            return new Build
+            var build = new Build
             {
                 Id = Resource.Id.ToString(),
                 Project = ResourceContainers.Project.Id,
                 Url = Resource.Url
             };
+
+            switch (Resource.Status)
+            {
+                case "succeeded":
+                    build.Status = BuildStatus.Succeeded;
+                    break;
+                case "failed":
+                    build.Status = BuildStatus.Succeeded;
+                    break;
+                case "stopped":
+                    build.Status = BuildStatus.Cancelled;
+                    break;
+                default:
+                    build.Status = BuildStatus.Unknown;
+                    break;
+            }
+
+            return build;
         }
     }
 }

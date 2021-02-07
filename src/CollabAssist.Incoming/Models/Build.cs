@@ -13,7 +13,6 @@ namespace CollabAssist.Incoming.Models
         public string OwnerName { get; set; }
         public string OwnerEmail { get; set; }
 
-        public bool HasPullRequestLinked { get; set; }
-        public string PullRequestUrl { get; set; }
+        public PullRequest PullRequest { get; set; }
     }
 }

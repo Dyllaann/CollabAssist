@@ -15,6 +15,12 @@ namespace CollabAssist.Output.Slack.Models
         [JsonProperty("ts")]
         public string Timestamp { get; set; }
 
+        [JsonProperty("thread_ts")]
+        public string ThreadTimestamp { get; set; }
+        
+        [JsonProperty("link_names")]
+        public bool LinkNames { get; set; }
+
         [JsonProperty("blocks")]
         public List<IBlock> Blocks { get; set; }
 

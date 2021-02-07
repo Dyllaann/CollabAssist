@@ -30,13 +30,8 @@ namespace CollabAssist.Incoming.DevOps.Client
 
         public async Task<string> GetPullRequestMetaData(PullRequest pr, string key)
         {
-            var match = Regex.Match(pr.Url, PrRegex);
-            if (match.Success)
-            {
-                var properties = await _gitHttpClient.GetPullRequestPropertiesAsync(pr.ProjectName, pr.RepositoryName, int.Parse(pr.Id)).ConfigureAwait(false);
-                return (string)properties.FirstOrDefault(p => p.Key == key).Value;
-            }
-            return null;
+            var properties = await _gitHttpClient.GetPullRequestPropertiesAsync(pr.ProjectName, pr.RepositoryName, int.Parse(pr.Id)).ConfigureAwait(false);
+            return (string)properties.FirstOrDefault(p => p.Key == key).Value;
         }
 
         public async Task<bool> StorePullRequestMetadata(PullRequest pr, string key, string data)
@@ -86,14 +81,40 @@ namespace CollabAssist.Incoming.DevOps.Client
                 var repo = devopsbuild.Repository.Name;
                 var prId = devopsbuild.TriggerInfo.FirstOrDefault(k => k.Key == "pr.number").Value;
                 var url = DevOpsUtils.FormatPrUrl(_config.BaseUrl, project, repo, prId);
-                build.PullRequestUrl = url;
-                build.HasPullRequestLinked = true;
+
+                build.PullRequest = new PullRequest
+                {
+                    Id = prId,
+                    ProjectName = project,
+                    RepositoryName = repo,
+                    Url = url
+                };
+
                 return build;
             }
             catch (VssException ex) when (ex.Message == "VS30063: You are not authorized to access https://dev.azure.com.")
             {
                 //TODO error handling: PAT expired or missing scope "Build -> Read"
                 throw;
+            }
+        }
+
+        public async Task<Build> FillPullRequestMetadataFromUrl(Build build)
+        {
+            try
+            {
+                var pr = await _gitHttpClient.GetPullRequestAsync(build.PullRequest.ProjectName, build.PullRequest.RepositoryName, int.Parse(build.PullRequest.Id))
+                    .ConfigureAwait(false);
+                build.PullRequest.AuthorName = pr.CreatedBy.DisplayName;
+                build.PullRequest.AuthorEmail = pr.CreatedBy.UniqueName;
+                build.PullRequest.CreatedDate = pr.CreationDate;
+                build.PullRequest.Title = pr.Title;
+                return build;
+            }
+            catch (VssException ex)// when (ex.Message == "VS30063: You are not authorized to access https://dev.azure.com.")
+            {
+                //TODO error handling: PAT expired or missing scope "Build -> Read"
+                return null;
             }
         }
     }

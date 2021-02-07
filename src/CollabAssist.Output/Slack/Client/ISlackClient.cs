@@ -11,7 +11,9 @@ namespace CollabAssist.Output.Slack.Client
     {
         Task<SlackResponse> PostMessage(SlackPayload payload);
         Task<SlackResponse> UpdateMessage(SlackPayload payload);
+        Task<SlackResponse> PostMessageAsThread(string channel, string timestamp);
         Task<SlackResponse> DeleteMessage(string channel, string timestamp);
         Task<SlackUserResponse> GetUserByEmail(string email);
+
     }
 }

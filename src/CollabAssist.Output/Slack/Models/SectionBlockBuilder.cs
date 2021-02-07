@@ -10,11 +10,6 @@ namespace CollabAssist.Output.Slack.Models
         private List<SectionField> _fields;
         private SectionAccessory _accessory;
 
-        public SectionBlockBuilder()
-        {
-            _fields = new List<SectionField>();
-        }
-
         public SectionBlockBuilder HasText(string text)
         {
             _text = new SectionText(text);
@@ -23,12 +18,22 @@ namespace CollabAssist.Output.Slack.Models
 
         public SectionBlockBuilder HasField(string text)
         {
+            if (_fields == null)
+            {
+                _fields = new List<SectionField>();
+            }
+
             _fields.Add(new SectionField(text));
             return this;
         }
 
         public SectionBlockBuilder HasField(string title, string data)
         {
+            if (_fields == null)
+            {
+                _fields = new List<SectionField>();
+            }
+
             _fields.Add(new SectionField($"*{title}*\n {data}"));
             return this;
         }

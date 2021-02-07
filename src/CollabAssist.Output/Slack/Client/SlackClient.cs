@@ -21,6 +21,7 @@ namespace CollabAssist.Output.Slack.Client
 
         public async Task<SlackResponse> PostMessage(SlackPayload payload)
         {
+            var serialized = payload.Serialize();
             var httpContent = new StringContent(payload.Serialize(), Encoding.UTF8, "application/json");
             var request = _httpClient.PostAsync("/api/chat.postMessage", httpContent);
             var response = await request.ConfigureAwait(false);
@@ -55,6 +56,11 @@ namespace CollabAssist.Output.Slack.Client
             }
 
             return null;
+        }
+
+        public Task<SlackResponse> PostMessageAsThread(string channel, string timestamp)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<SlackResponse> DeleteMessage(string channel, string timestamp)

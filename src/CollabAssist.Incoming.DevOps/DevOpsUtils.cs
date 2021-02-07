@@ -9,14 +9,14 @@ namespace CollabAssist.Incoming.DevOps
 
         public static string FormatPrUrl(DevOpsPullRequestNotification pr)
         {
-            var projectUrl = pr.PullRequestResource.Repository.Project.Url;
+            var projectUrl = pr.Resource.Repository.Project.Url;
             var regex = Regex.Match(projectUrl, OrganizationRegex);
             if (regex.Success)
             {
                 var org = regex.Groups[2];
-                var project = pr.PullRequestResource.Repository.Project.Name;
-                var repository = pr.PullRequestResource.Repository.Name;
-                var id = pr.PullRequestResource.PullRequestId;
+                var project = pr.Resource.Repository.Project.Name;
+                var repository = pr.Resource.Repository.Name;
+                var id = pr.Resource.PullRequestId;
 
                 return $"https://dev.azure.com/{org}/{project}/_git/{repository}/pullrequest/{id}";
             }

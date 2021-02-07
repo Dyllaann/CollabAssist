@@ -29,7 +29,7 @@ namespace CollabAssist.Incoming.DevOps.Models
         public string Reason { get; set; }
 
         [JsonProperty("status")]
-        public string Succeeded { get; set; }
+        public string Status { get; set; }
 
 
 

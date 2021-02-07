@@ -27,12 +27,12 @@ namespace CollabAssist.Services
                 return false;
             }
 
-            return await _inputHandler.StoreIdentifier(pr, "CollabAssist.MessageIdentifier", identifier).ConfigureAwait(false);
+            return await _inputHandler.StoreIdentifier(pr, IdentifierKeys.Identifier, identifier).ConfigureAwait(false);
         }
 
         public async Task<bool> HandleUpdatedPullRequest(PullRequest pr)
         {
-            var identifier = await _inputHandler.GetIdentifier(pr, "CollabAssist.MessageIdentifier").ConfigureAwait(false);
+            var identifier = await _inputHandler.GetIdentifier(pr, IdentifierKeys.Identifier).ConfigureAwait(false);
             if (identifier == null)
             {
                 return false;

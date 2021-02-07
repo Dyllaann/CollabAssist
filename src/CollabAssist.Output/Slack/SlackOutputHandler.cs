@@ -37,26 +37,29 @@ namespace CollabAssist.Output.Slack
             return null;
         }
 
-        public async Task<bool> HandleUpdatedPullRequest(PullRequest update, string inputHandlerId = null)
+        public async Task<bool> HandleUpdatedPullRequest(PullRequest update, string identifier)
         {
             var profilePicture = await GetAuthorProfilePictureUrl(update).ConfigureAwait(false);
             var payload = profilePicture != null
                 ? SlackMessageFormatter.FormatUpdatedPullRequestWithImage(update, _configuration.Channel, profilePicture)
                 : SlackMessageFormatter.FormatUpdatedPullRequest(update, _configuration.Channel);
 
-            var success = await _client.PostMessage(payload);
+            var success = await _client.PostMessage(payload).ConfigureAwait(false);
             return success.Ok;
         }
 
-        public async Task<bool> HandleAbandonedPullRequest(PullRequest update, string inputHandlerId = null)
+        public async Task<bool> HandleAbandonedPullRequest(PullRequest update, string identifier)
         {
-            var success = await _client.DeleteMessage(_configuration.Channel, inputHandlerId).ConfigureAwait(false);
+            var success = await _client.DeleteMessage(_configuration.Channel, identifier).ConfigureAwait(false);
             return success.Ok;
         }
 
-        public Task<bool> NotifyFailedPullRequestBuild(Build build)
+        public async Task<bool> NotifyFailedPullRequestBuild(Build build, string identifier)
         {
-            throw new NotImplementedException();
+            var pullRequestOwner = await _client.GetUserByEmail(build.PullRequest.AuthorEmail).ConfigureAwait(false);
+            var payload = SlackMessageFormatter.FormatFailedBuild(build, _configuration.Channel, identifier, pullRequestOwner);
+            var success = await _client.PostMessage(payload).ConfigureAwait(false);
+            return success.Ok;
         }
 
         private async Task<string> GetAuthorProfilePictureUrl(PullRequest pr)

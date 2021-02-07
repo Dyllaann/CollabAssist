@@ -21,12 +21,19 @@ namespace CollabAssist.Services
 
         public async Task<bool> HandleBuild(Build build)
         {
-            build = await _inputHandler.LinkBuildWithPr(build).ConfigureAwait(false);
-            if (build.HasPullRequestLinked)
+            if (build.Status == BuildStatus.Failed)
             {
-                await _outputHandler.NotifyFailedPullRequestBuild(build).ConfigureAwait(false);
+                build = await _inputHandler.LinkBuildWithPr(build).ConfigureAwait(false);
+                if (build.PullRequest != null)
+                {
+                    var identifier = await _inputHandler.GetIdentifier(build.PullRequest, IdentifierKeys.Identifier);
+                    await _outputHandler.NotifyFailedPullRequestBuild(build, identifier).ConfigureAwait(false);
+                }
+
+                return false;
             }
-            return false;
+
+            return true;
         }
     }
 }

@@ -20,10 +20,10 @@ namespace CollabAssist.API.Controllers
 
         [HttpPost]
         [Route("")]
-        public IActionResult NewBuild([FromBody] DevOpsBuildNotification devopsBuild)
+        public async Task<IActionResult> NewBuild([FromBody] DevOpsBuildNotification devopsBuild)
         {
             var build = devopsBuild.To();
-            _buildService.HandleBuild(build);
+            await _buildService.HandleBuild(build);
 
             return new OkResult();
         }

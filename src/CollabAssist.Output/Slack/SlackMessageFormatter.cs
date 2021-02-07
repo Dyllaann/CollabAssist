@@ -83,6 +83,29 @@ namespace CollabAssist.Output.Slack
                 .Build();
         }
 
+        public static SlackPayload FormatFailedBuild(Build build, string slackChannel, string updateTs, SlackUserResponse pullRequestOwner)
+        {
+            var payloadBuilder = new SlackPayloadBuilder();
+            var builder = payloadBuilder
+                .SendsTo(slackChannel)
+                .PostsAsThreadIn(updateTs)
+                .LinksNames(true)
+                .HasPreviewText($"Build of your PR failed.");
+
+            if (pullRequestOwner != null)
+            {
+                builder.WithSection(s =>
+                    s.HasText($"Hey <@{pullRequestOwner.SlackUser.Id}>, the build of this PR failed."));
+            }
+            else
+            {
+                builder.WithSection(s =>
+                    s.HasText($"I was unable to find who to tag for this PullRequest, but the build failed."));
+            }
+
+            return builder.Build();
+        }
+
         private static string FormatReviewersField(List<Reviewer> reviewers)
         {
             var fieldData = "";

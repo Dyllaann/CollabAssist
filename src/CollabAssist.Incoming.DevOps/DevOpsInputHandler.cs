@@ -29,9 +29,9 @@ namespace CollabAssist.Incoming.DevOps
 
         public async Task<Build> LinkBuildWithPr(Build build)
         {
-            var metadata= await _devopsclient.LinkBuildWithPr(build).ConfigureAwait(false);
+            build = await _devopsclient.LinkBuildWithPr(build).ConfigureAwait(false);
+            build = await _devopsclient.FillPullRequestMetadataFromUrl(build);
             return build;
-
         }
     }
 }

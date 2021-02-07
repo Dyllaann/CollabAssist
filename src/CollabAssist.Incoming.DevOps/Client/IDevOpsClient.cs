@@ -9,5 +9,6 @@ namespace CollabAssist.Incoming.DevOps.Client
         Task<bool> StorePullRequestMetadata(PullRequest pr, string key, string data);
 
         Task<Build> LinkBuildWithPr(Build build);
+        Task<Build> FillPullRequestMetadataFromUrl(Build build);
     }
 }
