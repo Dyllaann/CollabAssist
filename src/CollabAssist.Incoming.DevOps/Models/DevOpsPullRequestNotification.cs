@@ -33,8 +33,7 @@ namespace CollabAssist.Incoming.DevOps.Models
 
         public bool IsValid()
         {
-            return SubscriptionId != Guid.Empty
-                   && Id != Guid.Empty
+            return Id != Guid.Empty
                    && NotificationId != 0
                    && EventType != null
                    && Resource != null;
