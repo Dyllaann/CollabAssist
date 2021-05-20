@@ -55,6 +55,7 @@ namespace CollabAssist.Incoming.DevOps.Client
             }
             catch (VssException ex) when (ex.Message.Contains("TF401181: The pull request cannot be edited due to its state."))
             {
+                return true;
                 //TODO error handling: The PR is probably completed or abandoned and can no longer be updated
             }
             catch (VssException ex) when (ex.Message == "VS30063: You are not authorized to access https://dev.azure.com.")
