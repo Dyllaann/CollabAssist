@@ -135,10 +135,19 @@ Task("Package-Docker")
 		var settings = new DockerImageBuildSettings 
 		{
 			File = "Dockerfile",
-			Tag = new [] { "collabassist:" + buildNumber }
+			Tag = new [] { 
+				"dyllaann/collabassist:" + buildNumber,
+				"dyllaann/collabassist:latest" 
+			}
 		};
 		
 		DockerBuild(settings, Environment.CurrentDirectory);
+});
+
+Task("Push-Docker")
+	.Does(() => {
+		DockerPush("dyllaann/collabassist:" + buildNumber);
+		DockerPush("dyllaann/collabassist:latest");
 });
 
 Task("Test-Unit")
