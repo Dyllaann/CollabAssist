@@ -16,5 +16,5 @@ jobs:
         dotnet-version: 3.1.402
 
     - name: Cake build
-    run: ./build.sh
-    shell: bash
+      run: ./build.sh
+      shell: bash
