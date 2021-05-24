@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Formatting.Json;
 
 namespace CollabAssist.API
 {
@@ -25,6 +27,12 @@ namespace CollabAssist.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+            services.AddSingleton(Log.Logger);
+
             var configSection = _configuration.GetSection("BasicAuth");
             var config = configSection.Get<AuthenticationConfiguration>();
             services.AddSingleton(config);
@@ -54,6 +62,10 @@ namespace CollabAssist.API
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<UnhandeledExceptionMiddleware>();
+
+            app.UseMiddleware<RequestLoggingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

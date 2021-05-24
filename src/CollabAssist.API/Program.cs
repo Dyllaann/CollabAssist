@@ -1,7 +1,6 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 
 namespace CollabAssist.API
 {
@@ -15,14 +14,13 @@ namespace CollabAssist.API
                .AddEnvironmentVariables()
                .Build();
 
-            Host.CreateDefaultBuilder(args)
-                    .ConfigureWebHostDefaults(webBuilder =>
-                    {
-                        webBuilder.UseStartup<Startup>();
-                        webBuilder.UseConfiguration(builder);
-                    })
-                    .Build()
-                    .Run();
+            new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(builder)
+                .UseStartup<Startup>()
+                .Build()
+                .Run();
         }
     }
 }
