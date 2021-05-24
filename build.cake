@@ -8,7 +8,7 @@ var testUnitProjectPattern = "./**/*Tests.Unit.csproj";
 var testIntegrationProjectPattern = "./**/*.Tests.Integration.csproj";
 var testAcceptanceProjectPattern = "./**/*.Tests.Acceptance.csproj";
 
-var buildNumber = EnvironmentVariable("GITHUB_JOB") ?? "1.0";
+var buildNumber = EnvironmentVariable("GITHUB_RUN_NUMBER") ?? "1.0";
 var artifactsPath = Argument("artifactsPath", "./artifacts");
 var isGithubBuild = (EnvironmentVariable("CI") ?? "False").ToLower() == "true";
 var testLogger = isGithubBuild ? "trx" : "console;verbosity=normal";
