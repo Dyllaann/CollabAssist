@@ -41,10 +41,10 @@ namespace CollabAssist.Output.Slack
         {
             var profilePicture = await GetAuthorProfilePictureUrl(update).ConfigureAwait(false);
             var payload = profilePicture != null
-                ? SlackMessageFormatter.FormatUpdatedPullRequestWithImage(update, _configuration.Channel, profilePicture)
-                : SlackMessageFormatter.FormatUpdatedPullRequest(update, _configuration.Channel);
+                ? SlackMessageFormatter.FormatUpdatedPullRequestWithImage(update, _configuration.Channel, identifier, profilePicture)
+                : SlackMessageFormatter.FormatUpdatedPullRequest(update, _configuration.Channel, identifier);
 
-            var success = await _client.PostMessage(payload).ConfigureAwait(false);
+            var success = await _client.UpdateMessage(payload).ConfigureAwait(false);
             return success.Ok;
         }
 

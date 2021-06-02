@@ -44,11 +44,12 @@ namespace CollabAssist.Output.Slack
                 .Build();
         }
 
-        public static SlackPayload FormatUpdatedPullRequest(PullRequest pr, string slackChannel)
+        public static SlackPayload FormatUpdatedPullRequest(PullRequest pr, string slackChannel, string identifier)
         {
             var payloadBuilder = new SlackPayloadBuilder();
             return payloadBuilder
                 .SendsTo(slackChannel)
+                .UpdatesMessage(identifier)
                 .HasPreviewText($"New PR in {pr.RepositoryName} from {pr.AuthorName}")
                 .WithDivider()
                 .WithContext(cbb =>
@@ -63,11 +64,12 @@ namespace CollabAssist.Output.Slack
                 .Build();
         }
 
-        public static SlackPayload FormatUpdatedPullRequestWithImage(PullRequest pr, string slackChannel, string profilePictureUrl)
+        public static SlackPayload FormatUpdatedPullRequestWithImage(PullRequest pr, string slackChannel, string identifier, string profilePictureUrl)
         {
             var payloadBuilder = new SlackPayloadBuilder();
             return payloadBuilder
                 .SendsTo(slackChannel)
+                .UpdatesMessage(identifier)
                 .HasPreviewText($"New PR in {pr.RepositoryName} from {pr.AuthorName}")
                 .WithDivider()
                 .WithContext(cbb =>
