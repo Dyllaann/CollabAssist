@@ -40,7 +40,7 @@ namespace CollabAssist.Incoming.DevOps.Models
                     build.Status = BuildStatus.Succeeded;
                     break;
                 case "failed":
-                    build.Status = BuildStatus.Succeeded;
+                    build.Status = BuildStatus.Failed;
                     break;
                 case "stopped":
                     build.Status = BuildStatus.Cancelled;
