@@ -21,11 +21,17 @@ namespace CollabAssist.API.Handlers
 
         public async Task Invoke(HttpContext httpContext)
         {
-            _logger.Information("Request start {url}", httpContext.Request.GetEncodedUrl());
-            await _next.Invoke(httpContext);
-            _logger.Information("Request end {url}: {statuscode}", httpContext.Request.GetEncodedUrl(),
-                httpContext.Response.StatusCode);
+            if (httpContext.Request.Path.Value != "/api/health/status")
+            {
+                _logger.Information("Request start {url}", httpContext.Request.GetEncodedUrl());
+            }
 
+            await _next.Invoke(httpContext);
+
+            if (httpContext.Request.Path.Value != "/api/health/status")
+            {
+                _logger.Information("Request end {url}: {statuscode}", httpContext.Request.GetEncodedUrl(), httpContext.Response.StatusCode);
+            }
         }
     }
 }
