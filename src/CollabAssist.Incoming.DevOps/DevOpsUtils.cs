@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using System.Web;
+﻿using System;
+using System.Text.RegularExpressions;
 using CollabAssist.Incoming.DevOps.Models;
 
 namespace CollabAssist.Incoming.DevOps
@@ -14,9 +14,9 @@ namespace CollabAssist.Incoming.DevOps
             var regex = Regex.Match(projectUrl, OrganizationRegex);
             if (regex.Success)
             {
-                var org = HttpUtility.UrlEncode(regex.Groups[2].Value);
-                var project = HttpUtility.UrlEncode(pr.Resource.Repository.Project.Name);
-                var repository = HttpUtility.UrlEncode(pr.Resource.Repository.Name);
+                var org = Uri.EscapeUriString(regex.Groups[2].Value);
+                var project = Uri.EscapeUriString(pr.Resource.Repository.Project.Name);
+                var repository = Uri.EscapeUriString(pr.Resource.Repository.Name);
                 var id = pr.Resource.PullRequestId;
 
                 return $"https://dev.azure.com/{org}/{project}/_git/{repository}/pullrequest/{id}";
