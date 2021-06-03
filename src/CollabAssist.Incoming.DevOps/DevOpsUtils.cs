@@ -14,13 +14,12 @@ namespace CollabAssist.Incoming.DevOps
             var regex = Regex.Match(projectUrl, OrganizationRegex);
             if (regex.Success)
             {
-                var org = regex.Groups[2];
-                var project = pr.Resource.Repository.Project.Name;
-                var repository = pr.Resource.Repository.Name;
+                var org = HttpUtility.UrlEncode(regex.Groups[2].Value);
+                var project = HttpUtility.UrlEncode(pr.Resource.Repository.Project.Name);
+                var repository = HttpUtility.UrlEncode(pr.Resource.Repository.Name);
                 var id = pr.Resource.PullRequestId;
 
-                var url = $"https://dev.azure.com/{org}/{project}/_git/{repository}/pullrequest/{id}";
-                return HttpUtility.UrlEncode(url);
+                return $"https://dev.azure.com/{org}/{project}/_git/{repository}/pullrequest/{id}";
             }
 
             return null;
