@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CollabAssist.Incoming;
 using CollabAssist.Incoming.Models;
 using CollabAssist.Output.Slack.Client;
+using CollabAssist.Output.Slack.Client.Exceptions;
 using CollabAssist.Output.Slack.Models;
 
 namespace CollabAssist.Output.Slack
@@ -56,7 +57,19 @@ namespace CollabAssist.Output.Slack
 
         public async Task<bool> NotifyFailedPullRequestBuild(Build build, string identifier)
         {
-            var pullRequestOwner = await _client.GetUserByEmail(build.PullRequest.AuthorEmail).ConfigureAwait(false);
+            SlackUserResponse pullRequestOwner = null;
+
+            try
+            {
+                pullRequestOwner = await _client.GetUserByEmail(build.PullRequest.AuthorEmail).ConfigureAwait(false);
+            }
+            catch (SlackClientException e) when ("users_not_found".Equals(e.Message, StringComparison.OrdinalIgnoreCase))
+            {
+                // When the user wasn't found we cannot notify them directly,
+                // by leaving pullRequestOwner null the FormatFailedBuild will
+                // create a generic message.
+            }
+
             var payload = SlackMessageFormatter.FormatFailedBuild(build, _configuration.Channel, identifier, pullRequestOwner);
             var success = await _client.PostMessage(payload).ConfigureAwait(false);
             return success.Ok;
@@ -64,8 +77,15 @@ namespace CollabAssist.Output.Slack
 
         private async Task<string> GetAuthorProfilePictureUrl(PullRequest pr)
         {
-            var user = await _client.GetUserByEmail(pr.AuthorEmail).ConfigureAwait(false);
-            return user?.SlackUser.Profile.Image512;
+            try
+            {
+                var user = await _client.GetUserByEmail(pr.AuthorEmail).ConfigureAwait(false);
+                return user?.SlackUser.Profile.Image512;
+            }
+            catch (SlackClientException e) when ("users_not_found".Equals(e.Message, StringComparison.OrdinalIgnoreCase))
+            {
+                return null;
+            }
         }
     }
 }
