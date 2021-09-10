@@ -94,15 +94,19 @@ namespace CollabAssist.Output.Slack
                 .LinksNames(true)
                 .HasPreviewText($"Build of your PR failed.");
 
+            var buildString = !string.IsNullOrEmpty(build.Url)
+                ? $"<{build.Url}|the build>"
+                : "the build";
+
             if (pullRequestOwner != null)
             {
                 builder.WithSection(s =>
-                    s.HasText($"Hey <@{pullRequestOwner.SlackUser.Id}>, the build of this PR failed."));
+                    s.HasText($"Hey <@{pullRequestOwner.SlackUser.Id}>, {buildString} of this PR failed."));
             }
             else
             {
                 builder.WithSection(s =>
-                    s.HasText($"I was unable to find who to tag for this PullRequest, but the build failed."));
+                    s.HasText($"I was unable to find who to tag for this PullRequest, but {buildString} failed."));
             }
 
             return builder.Build();
