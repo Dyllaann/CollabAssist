@@ -95,7 +95,7 @@ namespace CollabAssist.Output.Slack
                 .HasPreviewText($"Build of your PR failed.");
 
             var buildString = !string.IsNullOrEmpty(build.Url)
-                ? $"<{build.Url}|the build>"
+                ? $"<{build.WebUrl}|the build>"
                 : "the build";
 
             if (pullRequestOwner != null)
