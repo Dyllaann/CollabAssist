@@ -2,7 +2,7 @@
 # Define directories.
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 TOOLS_DIR=$SCRIPT_DIR/tools
-CAKE_VERSION=0.31.0
+CAKE_VERSION=0.36.0
 CAKE_DLL=$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION/Cake.dll
 
 # Disable dotnet sdk telemetry
@@ -47,7 +47,7 @@ if [ "$EUID" -eq 0 ]
             dpkg -i /tmp/packages-microsoft-prod.deb
 
             apt-get update
-            apt-get install -y dotnet-sdk-2.1
+            apt-get install -y dotnet-sdk-3.1
         fi
     fi
 fi
