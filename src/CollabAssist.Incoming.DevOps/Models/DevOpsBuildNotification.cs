@@ -31,7 +31,8 @@ namespace CollabAssist.Incoming.DevOps.Models
             {
                 Id = Resource.Id.ToString(),
                 Project = ResourceContainers.Project.Id,
-                Url = Resource.Url
+                Url = Resource.Url,
+                WebUrl = Resource.Url.Replace("/_apis/build/Builds/", "/_build/results?buildId=")
             };
 
             switch (Resource.Status)

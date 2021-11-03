@@ -27,7 +27,7 @@ namespace CollabAssist.Services
                 if (build.PullRequest != null)
                 {
                     var identifier = await _inputHandler.GetIdentifier(build.PullRequest, IdentifierKeys.Identifier);
-                    await _outputHandler.NotifyFailedPullRequestBuild(build, identifier).ConfigureAwait(false);
+                    return await _outputHandler.NotifyFailedPullRequestBuild(build, identifier).ConfigureAwait(false);
                 }
 
                 return false;
