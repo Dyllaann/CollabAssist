@@ -37,6 +37,10 @@ namespace CollabAssist.API
             var config = configSection.Get<AuthenticationConfiguration>();
             services.AddSingleton(config);
 
+            var settingsSection = _configuration.GetSection("Settings");
+            var settings = configSection.Get<SettingsConfiguration>();
+            services.AddSingleton(settings);
+
             services.AddSingleton<AuthenticationHandler>();
             AddBasicAuthentication(services);
 
