@@ -33,7 +33,8 @@ namespace CollabAssist.API.Controllers
                     return new OkResult();
                 }
             }
-            return ErrorResult();
+
+            return BadRequest();
         }
 
         [HttpPost]
@@ -48,16 +49,8 @@ namespace CollabAssist.API.Controllers
                     return new OkResult();
                 }
             }
-            return ErrorResult();
-        }
 
-        private IActionResult ErrorResult()
-        {
-            if (_settingsConfiguration.AlwaysReturnOk)
-            {
-                return new OkResult();
-            }
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return BadRequest();
         }
     }
 }
